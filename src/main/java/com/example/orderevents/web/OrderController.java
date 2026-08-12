@@ -44,7 +44,7 @@ public class OrderController{
 
 	@GetMapping
 	public ResponseEntity<Map<String,List<OrderHistoryDocument>>> getAllOrders(){
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(Map.of("orders",orderHistoryRepository.findAll()));
+		return ResponseEntity.status(HttpStatus.OK).body(Map.of("orders",orderHistoryRepository.findAll()));
 	}
 	
     @GetMapping("/{orderId}")

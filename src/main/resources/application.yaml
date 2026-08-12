@@ -33,4 +33,4 @@ management:
 
 logging:
   level:
-    com.example.orderevents.orderevents: INFO
+    com.example.orderevents: INFO
