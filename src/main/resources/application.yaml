@@ -1,3 +1,36 @@
 spring:
   application:
     name: order-events-service
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      # acks=all: wait for all in-sync replicas to acknowledge before
+      # considering the publish successful -- the durability guarantee
+      # that "202 Accepted" is actually making a promise about.
+      acks: all
+
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/order_events}
+
+app:
+  kafka:
+    retry:
+      max-attempts: 3
+      backoff-ms: 1000
+
+server:
+  port: ${SERVER_PORT:8082}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    com.example.orderevents.orderevents: INFO
